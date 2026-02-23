@@ -1,0 +1,37 @@
+{
+    "log_level": "INFO",
+    "locale": "zh-CN",
+    "game_url": "https://game.maj-soul.com/1/",
+    "platform": "majsoul",
+    "mitm": {
+        "enabled": false,
+        "host": "127.0.0.1",
+        "port": 6789,
+        "upstream": ""
+    },
+    "server": {
+        "host": "127.0.0.1",
+        "port": 8765
+    },
+    "ot": {
+        "online": false,
+        "server": "http://127.0.0.1:5000",
+        "api_key": "<YOUR_API_KEY>"
+    },
+    "model_config": {
+        "temperature": 0.3,
+        "rule_based_agari_guard": true,
+        "model_4p": "mortal_mode16_konten_5090_super.test_140000z1.pth",
+        "model_3p": "mortal3p.pth"
+    },
+    "autoplay": {
+        "enabled": true,
+        "mode": "playwright",
+        "auto_launch_browser": false,
+        "viewport_width": 1280,
+        "viewport_height": 720,
+        "think_delay_ms": 150,
+        "real_mouse_speed_pps": 2200,
+        "real_mouse_jitter_px": 2
+    }
+}

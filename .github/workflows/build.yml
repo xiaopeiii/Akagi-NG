@@ -1,0 +1,127 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g., x.y.z)"
+        required: false
+        default: "dev"
+
+env:
+  PYTHONUTF8: 1
+  # Skip mockup mode for production builds
+  AKAGI_MOCK_MODE: 0
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: |
+            akagi_frontend/package-lock.json
+            electron/package-lock.json
+
+      - name: Install Python dependencies
+        working-directory: akagi_backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Install Frontend dependencies
+        working-directory: akagi_frontend
+        run: npm ci
+
+      - name: Install Electron dependencies
+        working-directory: electron
+        run: npm ci
+
+      - name: Build Electron App
+        working-directory: electron
+        run: npm run build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: akagi-ng-windows-${{ github.event.inputs.version || 'dev' }}
+          path: |
+            dist/release/*.exe
+            dist/release/*.zip
+          retention-days: 30
+          if-no-files-found: error
+
+  build-macos-arm64:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: |
+            akagi_frontend/package-lock.json
+            electron/package-lock.json
+
+      - name: Install Python dependencies
+        working-directory: akagi_backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install --find-links https://github.com/shinkuan/Akagi/releases/expanded_assets/v0.1.1-libriichi "riichi>=0.1.1"
+
+      - name: Install Frontend dependencies
+        working-directory: akagi_frontend
+        run: npm ci
+
+      - name: Install Electron dependencies
+        working-directory: electron
+        run: npm ci
+
+      - name: Build Electron App (macOS arm64 dmg)
+        working-directory: electron
+        run: |
+          if [ -z "${CSC_NAME}" ]; then
+            echo "CSC_NAME is empty; building unsigned package."
+            export CSC_IDENTITY_AUTO_DISCOVERY=false
+          fi
+          npm run build:mac:arm64
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          CSC_NAME: ${{ secrets.CSC_NAME }}
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: akagi-ng-macos-arm64-${{ github.event.inputs.version || 'dev' }}
+          path: dist/release/*.dmg
+          retention-days: 30
+          if-no-files-found: error
