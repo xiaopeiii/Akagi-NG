@@ -1,3 +1,39 @@
+﻿# Akagi-NG - Feature Update Summary
+
+English is the primary language in this README. Chinese summary is included below.
+
+## Overview
+This repository summarizes recent Akagi-NG feature work.
+The main newly added feature in this update is **Auto-Play**.
+
+## Main New Feature (EN)
+1. Auto-Play (Primary Update)
+- Added an automatic play mode that can execute AI-recommended actions during gameplay.
+- Goal: reduce manual operation load and keep action execution consistent with model decisions.
+
+## Additional Highlights (EN)
+1. Riichi Lookahead support for post-riichi discard guidance
+2. Replay optimization to avoid unnecessary repeated inference during replay
+3. Modern HUD workflow and multi-language desktop experience
+4. Multi-platform / multi-mode support (4p and 3p)
+
+## Attribution
+- Akagi-NG maintainers: Akagi-NG Contributors (Xe-Persistent)
+- Upstream source: https://github.com/Xe-Persistent/Akagi-NG
+- Inspired by: Akagi and MajsoulHelper
+
+## 中文摘要（辅）
+1. 本次主要新增功能：自动打牌（Auto-Play）。
+2. 自动打牌用于按 AI 建议自动执行动作，减少手动操作并提高执行一致性。
+3. 其他增强包括立直推演、重放优化、HUD 与多语言体验。
+
+## Sensitive Data Notice
+No personal secrets, local absolute paths, tokens, or private runtime logs are included in this repository.
+
+
+<!--
+Original upstream README is commented out below for reference.
+
 <div align="center">
   <img src="https://gcore.jsdelivr.net/gh/Xe-Persistent/CDN-source/image/assets/akagi.png" width="50%">
   <h1>Akagi-NG</h1>
@@ -6,7 +42,7 @@
     Next Generation Mahjong AI Assistant<br>
     Inspired by <b>Akagi</b> and <b>MajsoulHelper</b>
   </p>
-<p><i>「死ねば助かるのに……」— 赤木しげる</i></p>
+<p><i>銆屾銇伆鍔┿亱銈嬨伄銇€︹€︺€嶁€?璧ゆ湪銇椼亽銈?/i></p>
 
   <img src="https://img.shields.io/badge/python-3.12+-blue?logo=python">
   <img src="https://img.shields.io/badge/platform-Windows-lightgrey">
@@ -14,7 +50,7 @@
 </p>
 
 <p align="center">
-  <a href="./README_ZH.md">简体中文</a> | <b>English</b>
+  <a href="./README_ZH.md">绠€浣撲腑鏂?/a> | <b>English</b>
 </p>
 </div>
 
@@ -35,7 +71,7 @@ Core Philosophy of Akagi-NG:
 
 ---
 
-## ⚠️ Disclaimer
+## 鈿狅笍 Disclaimer
 
 This project is for **educational and research purposes only**.
 
@@ -48,21 +84,21 @@ Please fully understand and assume the relevant risks before use.
 
 ## Features
 
-- 🎮 **Supported Platforms**
+- 馃幃 **Supported Platforms**
   - Mahjong Soul
   - Tenhou
   - Riichi City
   - Amatsuki Mahjong
 
-- 🀄 **Supported Modes**
+- 馃€?**Supported Modes**
   - Four-Player Mahjong (4p)
   - Three-Player Mahjong (3p)
 
-- 🤖 **AI Models**
+- 馃 **AI Models**
   - Mortal (Mortal 4p / Mortal 3p)
   - AkagiOT (AkagiOT 4p / AkagiOT 3p)
 
-- 🧠 **Core Functions**
+- 馃 **Core Functions**
   - Real-time hand analysis and AI discard recommendations
   - Auto-Play - Automatically execute AI-recommended actions with one toggle
   - Riichi Lookahead - Intelligent recommendation for the best discard after reaching
@@ -131,22 +167,22 @@ Please check the directory structure where `Akagi-NG.exe` is located.
 
 ```plain
 Akagi-NG/
-  ├── Akagi-NG.exe     # Main Application (Electron Desktop)
-  ├── assets/          # Platform-specific UI assets
-  ├── bin/             # Backend core executable directory
-  ├── config/          # Configuration directory (settings.json)
-  ├── lib/             # libriichi local extension libraries (.pyd/.so)
-  │     ├── libriichi.pyd
-  │     └── libriichi3p.pyd
-  ├── locales/         # Localization resource files
-  ├── logs/            # Runtime log directory
-  ├── models/          # AI model weight files (.pth)
-  │     ├── mortal.pth
-  │     └── mortal3p.pth
-  ├── resources/       # Electron core resources (app.asar)
-  ├── LICENSE.txt      # Open source license
-  ├── README.txt       # Quick start plain text guide
-  └── ...              # Other runtime files (.dll, .pak, etc.)
+  鈹溾攢鈹€ Akagi-NG.exe     # Main Application (Electron Desktop)
+  鈹溾攢鈹€ assets/          # Platform-specific UI assets
+  鈹溾攢鈹€ bin/             # Backend core executable directory
+  鈹溾攢鈹€ config/          # Configuration directory (settings.json)
+  鈹溾攢鈹€ lib/             # libriichi local extension libraries (.pyd/.so)
+  鈹?    鈹溾攢鈹€ libriichi.pyd
+  鈹?    鈹斺攢鈹€ libriichi3p.pyd
+  鈹溾攢鈹€ locales/         # Localization resource files
+  鈹溾攢鈹€ logs/            # Runtime log directory
+  鈹溾攢鈹€ models/          # AI model weight files (.pth)
+  鈹?    鈹溾攢鈹€ mortal.pth
+  鈹?    鈹斺攢鈹€ mortal3p.pth
+  鈹溾攢鈹€ resources/       # Electron core resources (app.asar)
+  鈹溾攢鈹€ LICENSE.txt      # Open source license
+  鈹溾攢鈹€ README.txt       # Quick start plain text guide
+  鈹斺攢鈹€ ...              # Other runtime files (.dll, .pak, etc.)
 ```
 
 ### 3. Run & Exit
@@ -285,7 +321,7 @@ This scheme is suitable for **PC/Steam Client** players. Since the client cannot
 
    ```yaml
    proxy-groups:
-     - name: 🀄 Mahjong Soul
+     - name: 馃€?Mahjong Soul
        proxies:
          - Akagi-Mitm
          - DIRECT
@@ -297,9 +333,9 @@ This scheme is suitable for **PC/Steam Client** players. Since the client cannot
 
    ```yaml
    rules:
-     - PROCESS-NAME,雀魂麻將,🀄 Mahjong Soul
-     - PROCESS-NAME,Jantama_MahjongSoul.exe,🀄 Mahjong Soul
-     - DOMAIN-Keyword,maj-soul,🀄 Mahjong Soul
+     - PROCESS-NAME,闆€榄傞夯灏?馃€?Mahjong Soul
+     - PROCESS-NAME,Jantama_MahjongSoul.exe,馃€?Mahjong Soul
+     - DOMAIN-Keyword,maj-soul,馃€?Mahjong Soul
    ```
 
 4. **Apply Configuration**:
@@ -393,3 +429,6 @@ xattr -dr com.apple.quarantine /Applications/Akagi-NG.app
 ## Open Source License
 
 This software follows the [GNU Affero General Public License version 3 (AGPLv3)](LICENSE) open source protocol.
+
+-->
+
