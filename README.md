@@ -21,16 +21,7 @@ The main newly added feature in this update is **Auto-Play**.
 - Akagi-NG maintainers: Akagi-NG Contributors (Xe-Persistent)
 - Upstream source: https://github.com/Xe-Persistent/Akagi-NG
 - Inspired by: Akagi and MajsoulHelper
-
-## 中文摘要（辅）
-1. 本次主要新增功能：自动打牌（Auto-Play）。
-2. 自动打牌用于按 AI 建议自动执行动作，减少手动操作并提高执行一致性。
-3. 其他增强包括立直推演、重放优化、HUD 与多语言体验。
-
-## Sensitive Data Notice
-No personal secrets, local absolute paths, tokens, or private runtime logs are included in this repository.
-
-
+  
 <!--
 Original upstream README is commented out below for reference.
 
